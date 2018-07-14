@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D35426E420F9CFD00019DF6C /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35426E320F9CFD00019DF6C /* Word.swift */; };
 		D3A7FA3C20F9C70900B68744 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A7FA3B20F9C70900B68744 /* AppDelegate.swift */; };
 		D3A7FA3E20F9C70900B68744 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A7FA3D20F9C70900B68744 /* ViewController.swift */; };
 		D3A7FA4120F9C70900B68744 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3A7FA3F20F9C70900B68744 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D35426E320F9CFD00019DF6C /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		D3A7FA3820F9C70900B68744 /* SpellingWasp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpellingWasp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3A7FA3B20F9C70900B68744 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3A7FA3D20F9C70900B68744 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 			children = (
 				D3A7FA3B20F9C70900B68744 /* AppDelegate.swift */,
 				D3A7FA3D20F9C70900B68744 /* ViewController.swift */,
+				D35426E320F9CFD00019DF6C /* Word.swift */,
 				D3A7FA3F20F9C70900B68744 /* Main.storyboard */,
 				D3A7FA4220F9C70F00B68744 /* Assets.xcassets */,
 				D3A7FA4420F9C70F00B68744 /* LaunchScreen.storyboard */,
@@ -137,6 +140,7 @@
 			files = (
 				D3A7FA3E20F9C70900B68744 /* ViewController.swift in Sources */,
 				D3A7FA3C20F9C70900B68744 /* AppDelegate.swift in Sources */,
+				D35426E420F9CFD00019DF6C /* Word.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,7 +294,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.dakotakim.SpellingWasp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -308,7 +312,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.dakotakim.SpellingWasp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
