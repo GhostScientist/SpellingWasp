@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class ViewController: UIViewController {
+    
+    let baseAPIURL = "https://od-api.oxforddictionaries.com/api/v1/en/"
+    var apiKey = ""
+    var appID = ""
     
     @IBOutlet weak var exampleOutlet: UIButton!
     @IBOutlet weak var repeatOutlet: UIButton!
@@ -19,7 +24,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var wordField: UILabel!
     @IBOutlet weak var wordDataLabel: UILabel!
     
-    var wordsToPresent = [String]()
+    var wordsToPresent = [Word]()
+    var wordsPresented = [Word]()
     var score = 0 {
         didSet {
             scoreLabel.text = "Score: \(score)"
@@ -28,6 +34,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        retrieveKeys()
         exampleOutlet.clipsToBounds = true
         exampleOutlet.layer.cornerRadius = 12.0
         repeatOutlet.clipsToBounds = true
@@ -37,6 +44,19 @@ class ViewController: UIViewController {
         skipOutlet.clipsToBounds = true
         skipOutlet.layer.cornerRadius = 62.5
 
+    }
+    
+    func retrieveKeys() {
+        var keys: NSDictionary?
+        
+        if let path = Bundle.main.path(forResource: "Keys", ofType: "plist") {
+            let url = URL(fileURLWithPath: path)
+            keys = NSDictionary(contentsOf: url)
+        }
+        if let dict = keys {
+            apiKey = dict["oxfordAppKey"] as! String
+            appID = dict["oxfordAppID"] as! String
+        }
     }
     
     @IBAction func exampleTapped(_ sender: UIButton) {
@@ -61,6 +81,10 @@ class ViewController: UIViewController {
             finalWord += "_ "
         }
         return finalWord
+    }
+    
+    func loadWordsFromAPI(_ number: Int) {
+        
     }
 }
 
