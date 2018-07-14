@@ -12,10 +12,10 @@ class Word {
     var word = ""
     var group = ""
     var origin = ""
-    var exampleOfUsage = [String]() // These will be read aloud using AVSpeechSynthesizer
+    var exampleOfUsage : String // These will be read aloud using AVSpeechSynthesizer
     var pronunciation : String // This will be the file name for the audio pronounciation.
     
-    init(word: String, group: String, origin: String, exampleOfUsage: [String], pronunciation: String) {
+    init(word: String, group: String, origin: String, exampleOfUsage: String, pronunciation: String) {
         self.word = word
         self.group = group
         self.origin = origin
@@ -26,4 +26,13 @@ class Word {
     func returnDescriptiveStringFor() -> String {
         return "\(self.group) - \(self.origin)"
     }
+    
+    func replaceLettersWithUndscore() -> String {
+        var finalWord = ""
+        for _ in self.word {
+            finalWord += "_ "
+        }
+        return finalWord
+    }
+    
 }
