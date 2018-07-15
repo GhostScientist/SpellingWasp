@@ -19,6 +19,8 @@ class ViewController: UIViewController {
     
     let testWord = "Cavort"
     
+    let dummyList = ["Ace", "Merchandise", "Design", "Store", "Movement", "Revolution", "Lens", "Possibility"]
+    
     @IBOutlet weak var exampleOutlet: UIButton!
     @IBOutlet weak var repeatOutlet: UIButton!
     @IBOutlet weak var solveOutlet: UIButton!
@@ -30,7 +32,7 @@ class ViewController: UIViewController {
     
     var wordsToPresent = [Word]()
     var wordsPresented = [Word]()
-    var currentWord = Word(word: "Temp", group: "Temp Group", origin: "Temp Origin", exampleOfUsage: "Hello, World", pronunciation: "Nil")
+    var currentWord = Word(word: "Wasp", group: "Noun", origin: "Old English", exampleOfUsage: "Swarms of bees and wasps would also have nested in the forest.", pronunciation: "Nil")
     var score = 0 {
         didSet {
             scoreLabel.text = "Score: \(score)"
@@ -40,8 +42,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         retrieveKeys()
-        shuffleWordsToBePresentedArray()
-        loadWordsFromAPI(50)
+        //shuffleWordsToBePresentedArray()
+        //loadWordsFromAPI(50)
         exampleOutlet.clipsToBounds = true
         exampleOutlet.layer.cornerRadius = 12.0
         repeatOutlet.clipsToBounds = true
@@ -50,7 +52,11 @@ class ViewController: UIViewController {
         solveOutlet.layer.cornerRadius = 62.5
         skipOutlet.clipsToBounds = true
         skipOutlet.layer.cornerRadius = 62.5
-
+        performSelector(inBackground: #selector(loadWordsFromAPI), with: nil)
+        for item in dummyList {
+            sendRequestToAPIFor(word: item)
+        }
+        
     }
     
     func shuffleWordsToBePresentedArray() {
@@ -79,13 +85,13 @@ class ViewController: UIViewController {
     
     @IBAction func exampleTapped(_ sender: UIButton) {
         let thisIsATest = "The quick brown fox jumped over the lazy dog."
-        var utterance = AVSpeechUtterance(string: thisIsATest)
-        var synth = AVSpeechSynthesizer()
+        let utterance = AVSpeechUtterance(string: thisIsATest)
+        let synth = AVSpeechSynthesizer()
         synth.speak(utterance)
     }
     
     @IBAction func repeatTapped(_ sender: UIButton) {
-        var synth = AVSpeechSynthesizer()
+        let synth = AVSpeechSynthesizer()
         synth.speak(AVSpeechUtterance(string: currentWord.word))
     }
     
@@ -109,6 +115,7 @@ class ViewController: UIViewController {
         _ = session.dataTask(with: request, completionHandler: { (data, response, error) in
             if let response = response, let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) {
                 let json = JSON(data)
+                //print("THE JSON DATA IS \(jsonData)")
                 self.buildWordObjectFrom(json)
             } else {
                 print(error)
@@ -121,16 +128,18 @@ class ViewController: UIViewController {
         var wordToReturn = Word(word: "Temp", group: "Temp", origin: "Temp", exampleOfUsage: "Temp", pronunciation: "Temp")
         for result in myJSON["results"].arrayValue {
             let word = result["id"].stringValue
-            let group = result["lexicalEntries"]["entries"]["lexicalCategory"].stringValue
-            let origin = result["lexicalEntries"]["entries"]["etymologies"].stringValue
-            let exampleOfUsage = result["lexicalEntries"]["entries"]["senses"]["examples"]["text"].stringValue
-            let pronunciationPath = result["lexicalEntries"]["pronunciations"]["audioFile"].stringValue
+            let group = result["lexicalEntries"][0]["lexicalCategory"].stringValue
+            let origin = result["lexicalEntries"][0]["entries"][0]["etymologies"][0].stringValue
+            let exampleOfUsage = result["lexicalEntries"][0]["entries"][0]["senses"][0]["examples"][0]["text"].stringValue
+            let pronunciationPath = result["lexicalEntries"][0]["pronunciations"][0]["audioFile"].stringValue
             wordToReturn = Word(word: word, group: group, origin: origin, exampleOfUsage: exampleOfUsage, pronunciation: pronunciationPath)
+            wordsToPresent.append(wordToReturn)
         }
+        
         return wordToReturn
     }
     
-    func loadWordsFromAPI(_ number: Int) {
+    @objc func loadWordsFromAPI(_ number: Int = 50) {
         for i in 0...number {
             sendRequestToAPIFor(word: wordsToPresent[i].word)
         }
