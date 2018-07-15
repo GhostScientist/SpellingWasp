@@ -32,7 +32,12 @@ class ViewController: UIViewController {
     
     var wordsToPresent = [Word]()
     var wordsPresented = [Word]()
-    var currentWord = Word(word: "Wasp", group: "Noun", origin: "Old English", exampleOfUsage: "Swarms of bees and wasps would also have nested in the forest.", pronunciation: "Nil")
+    var currentWord = Word(word: "Wasp", group: "Noun", origin: "Old English", exampleOfUsage: "Swarms of bees and wasps would also have nested in the forest.", pronunciation: "Nil") {
+        didSet {
+            wordField.text = currentWord.replaceLettersWithUndscore()
+        }
+    }
+    
     var score = 0 {
         didSet {
             scoreLabel.text = "Score: \(score)"
