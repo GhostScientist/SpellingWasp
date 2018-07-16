@@ -16,7 +16,6 @@ class ViewController: UIViewController {
     
     var audioPlayer: AVAudioPlayer!
     
-    
     let baseAPIURL = "https://od-api.oxforddictionaries.com/api/v1/entries/en/"
     var apiKey = ""
     var appID = ""
@@ -41,6 +40,8 @@ class ViewController: UIViewController {
             // It will also play the audio of the clip.
         }
     }
+    
+    //var currentAudioFile
     
     var doneLoadingFromFile = false {
         didSet {
@@ -84,7 +85,6 @@ class ViewController: UIViewController {
                 }
             }
         }
-        stringsLoadedFromTextFile = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: stringsLoadedFromTextFile) as! [String]
         doneLoadingFromFile = true
     }
     
@@ -117,7 +117,18 @@ class ViewController: UIViewController {
     }
     
     @IBAction func solveTapped(_ sender: UIButton) {
+        let ac = UIAlertController(title: "Solve", message: "Do your best!", preferredStyle: .alert)
+        ac.addTextField()
         
+        ac.addAction(UIAlertAction(title: "Submit", style: .default, handler: { (action) in
+            if ac.textFields![0].text!.lowercased() == self.currentWord.word.lowercased() { // If the word the user entered is correct
+                self.score += 1
+                self.wordsToPresent.remove(at: 0)
+                self.currentWord = self.wordsToPresent[0]
+            }
+        }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(ac, animated: true)
     }
     
     @IBAction func skipTapped(_ sender: UIButton) {
@@ -125,8 +136,7 @@ class ViewController: UIViewController {
     }
     
     func sendRequestToAPIFor(word: String) {
-        let word_id = word.lowercased()
-        let url = URL(string: baseAPIURL + word_id)!
+        let url = URL(string: baseAPIURL + word)!
         var request = URLRequest(url: url)
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue(appID, forHTTPHeaderField: "app_id")
@@ -154,8 +164,8 @@ class ViewController: UIViewController {
     func buildWordObjectFrom(_ myJSON: JSON) {
         var wordToReturn = Word(word: "Temp", group: "Temp", origin: "Temp", exampleOfUsage: "Temp", pronunciation: "Temp")
         for result in myJSON["results"].arrayValue {
-            let word = result["id"].stringValue
-            let group = result["lexicalEntries"][0]["lexicalCategory"].stringValue
+            let word = result["id"].stringValue.capitalized
+            let group = result["lexicalEntries"][0]["lexicalCategory"].stringValue.capitalized
             let origin = result["lexicalEntries"][0]["entries"][0]["etymologies"][0].stringValue
             let exampleOfUsage = result["lexicalEntries"][0]["entries"][0]["senses"][0]["examples"][0]["text"].stringValue
             let pronunciationPath = result["lexicalEntries"][0]["pronunciations"][0]["audioFile"].stringValue
