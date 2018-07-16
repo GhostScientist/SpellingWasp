@@ -10,6 +10,7 @@
 		D215530506D6FA7E8448E81E /* Pods_SpellingWasp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 960A80087FAB76F6B611E852 /* Pods_SpellingWasp.framework */; };
 		D35426E420F9CFD00019DF6C /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35426E320F9CFD00019DF6C /* Word.swift */; };
 		D372A2CB20FB780400035546 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = D372A2CA20FB780400035546 /* Keys.plist */; };
+		D3A4CFF720FC7C230091885C /* all_words.txt in Resources */ = {isa = PBXBuildFile; fileRef = D3A4CFF620FC7C230091885C /* all_words.txt */; };
 		D3A7FA3C20F9C70900B68744 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A7FA3B20F9C70900B68744 /* AppDelegate.swift */; };
 		D3A7FA3E20F9C70900B68744 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A7FA3D20F9C70900B68744 /* ViewController.swift */; };
 		D3A7FA4120F9C70900B68744 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3A7FA3F20F9C70900B68744 /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 		BD79EAE287D7C0E84844BD2C /* Pods-SpellingWasp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpellingWasp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpellingWasp/Pods-SpellingWasp.debug.xcconfig"; sourceTree = "<group>"; };
 		D35426E320F9CFD00019DF6C /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		D372A2CA20FB780400035546 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		D3A4CFF620FC7C230091885C /* all_words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = all_words.txt; sourceTree = "<group>"; };
 		D3A7FA3820F9C70900B68744 /* SpellingWasp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpellingWasp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3A7FA3B20F9C70900B68744 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3A7FA3D20F9C70900B68744 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				D3A7FA4420F9C70F00B68744 /* LaunchScreen.storyboard */,
 				D3A7FA4720F9C70F00B68744 /* Info.plist */,
 				D372A2CA20FB780400035546 /* Keys.plist */,
+				D3A4CFF620FC7C230091885C /* all_words.txt */,
 			);
 			path = SpellingWasp;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 				D372A2CB20FB780400035546 /* Keys.plist in Resources */,
 				D3A7FA4620F9C70F00B68744 /* LaunchScreen.storyboard in Resources */,
 				D3A7FA4320F9C70F00B68744 /* Assets.xcassets in Resources */,
+				D3A4CFF720FC7C230091885C /* all_words.txt in Resources */,
 				D3A7FA4120F9C70900B68744 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -190,10 +194,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SpellingWasp/Pods-SpellingWasp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

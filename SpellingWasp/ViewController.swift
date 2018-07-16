@@ -10,16 +10,18 @@ import UIKit
 import SwiftyJSON
 import AVFoundation
 import GameplayKit
+import Alamofire
 
 class ViewController: UIViewController {
+    
+    var audioPlayer: AVAudioPlayer!
+    
     
     let baseAPIURL = "https://od-api.oxforddictionaries.com/api/v1/entries/en/"
     var apiKey = ""
     var appID = ""
     
     let testWord = "Cavort"
-    
-    let dummyList = ["Ace", "Merchandise", "Design", "Store", "Movement", "Revolution", "Lens", "Possibility"]
     
     @IBOutlet weak var exampleOutlet: UIButton!
     @IBOutlet weak var repeatOutlet: UIButton!
@@ -30,11 +32,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var wordField: UILabel!
     @IBOutlet weak var wordDataLabel: UILabel!
     
+    var stringsLoadedFromTextFile = [String]()
     var wordsToPresent = [Word]()
     var wordsPresented = [Word]()
     var currentWord = Word(word: "Wasp", group: "Noun", origin: "Old English", exampleOfUsage: "Swarms of bees and wasps would also have nested in the forest.", pronunciation: "Nil") {
         didSet {
             wordField.text = currentWord.replaceLettersWithUndscore()
+            // It will also play the audio of the clip.
+        }
+    }
+    
+    var doneLoadingFromFile = false {
+        didSet {
+            loadWordsFromAPI()
         }
     }
     
@@ -47,8 +57,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         retrieveKeys()
-        //shuffleWordsToBePresentedArray()
-        //loadWordsFromAPI(50)
+        performSelector(inBackground: #selector(loadStringArrayFromTextFile), with: nil)
         exampleOutlet.clipsToBounds = true
         exampleOutlet.layer.cornerRadius = 12.0
         repeatOutlet.clipsToBounds = true
@@ -57,22 +66,30 @@ class ViewController: UIViewController {
         solveOutlet.layer.cornerRadius = 62.5
         skipOutlet.clipsToBounds = true
         skipOutlet.layer.cornerRadius = 62.5
-        performSelector(inBackground: #selector(loadWordsFromAPI), with: nil)
-        for item in dummyList {
-            sendRequestToAPIFor(word: item)
+    }
+    
+    @objc func loadStringArrayFromTextFile() {
+        if let allWordsTextFilePath = Bundle.main.path(forResource: "all_words", ofType: "txt") {
+            if let wordsFromFile = try? String.init(contentsOfFile: allWordsTextFilePath) {
+                let mixedList = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: wordsFromFile.components(separatedBy: "\n")) as! [String]
+                for each in mixedList {
+                    if stringsLoadedFromTextFile.count < 30 {
+                        if each.count >= 6 {
+                            let filteredText = String(each.filter { !" \n\t\r".contains($0) })
+                            stringsLoadedFromTextFile.append(filteredText.lowercased())
+                        }
+                    } else {
+                        break
+                    }
+                }
+            }
         }
-        
+        stringsLoadedFromTextFile = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: stringsLoadedFromTextFile) as! [String]
+        doneLoadingFromFile = true
     }
     
     func shuffleWordsToBePresentedArray() {
         wordsToPresent = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: wordsToPresent) as! [Word]
-    }
-    
-    func parse(_ json: JSON) {
-        for result in json["results"].arrayValue {
-            let word = result["id"].stringValue
-            print("hello, the word we're looking at is \(word)")
-        }
     }
     
     func retrieveKeys() {
@@ -89,8 +106,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func exampleTapped(_ sender: UIButton) {
-        let thisIsATest = "The quick brown fox jumped over the lazy dog."
-        let utterance = AVSpeechUtterance(string: thisIsATest)
+        let utterance = AVSpeechUtterance(string: currentWord.exampleOfUsage)
         let synth = AVSpeechSynthesizer()
         synth.speak(utterance)
     }
@@ -127,9 +143,15 @@ class ViewController: UIViewController {
                 print(NSString.init(data: data!, encoding: String.Encoding.utf8.rawValue))
             }
         }).resume()
+        
     }
     
-    func buildWordObjectFrom(_ myJSON: JSON) -> Word {
+    func downloadAudioFileFrom(_ path: URL) {
+        // This function will download the word's audio file from the API
+        // It will then set the currentAudioFile variable at the top for easy reference/overwriting.
+    }
+    
+    func buildWordObjectFrom(_ myJSON: JSON) {
         var wordToReturn = Word(word: "Temp", group: "Temp", origin: "Temp", exampleOfUsage: "Temp", pronunciation: "Temp")
         for result in myJSON["results"].arrayValue {
             let word = result["id"].stringValue
@@ -138,16 +160,16 @@ class ViewController: UIViewController {
             let exampleOfUsage = result["lexicalEntries"][0]["entries"][0]["senses"][0]["examples"][0]["text"].stringValue
             let pronunciationPath = result["lexicalEntries"][0]["pronunciations"][0]["audioFile"].stringValue
             wordToReturn = Word(word: word, group: group, origin: origin, exampleOfUsage: exampleOfUsage, pronunciation: pronunciationPath)
+            print("The word \(wordToReturn.word) is being added to the array")
             wordsToPresent.append(wordToReturn)
         }
-        
-        return wordToReturn
     }
     
-    @objc func loadWordsFromAPI(_ number: Int = 50) {
+    @objc func loadWordsFromAPI(_ number: Int = 29) {
         for i in 0...number {
-            sendRequestToAPIFor(word: wordsToPresent[i].word)
+            sendRequestToAPIFor(word: stringsLoadedFromTextFile[i])
         }
+        print(wordsToPresent)
     }
 }
 
