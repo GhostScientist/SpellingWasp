@@ -13,21 +13,31 @@ class Word {
     var group = ""
     var origin = ""
     var exampleOfUsage : String // These will be read aloud using AVSpeechSynthesizer
-    var pronunciation : String // This will be the file name for the audio pronounciation.
     
-    init(word: String, group: String, origin: String, exampleOfUsage: String, pronunciation: String) {
+    init(word: String, group: String, origin: String, exampleOfUsage: String) {
         self.word = word
         self.group = group
         self.origin = origin
-        self.exampleOfUsage = exampleOfUsage
-        self.pronunciation = pronunciation
+        if exampleOfUsage.count > 0 {
+            self.exampleOfUsage = exampleOfUsage
+        } else {
+            self.exampleOfUsage = "There are no examples for the word \(word)."
+        }
     }
     
     func returnDescriptiveStringFor() -> String {
-        return "\(self.group) - \(self.origin)"
+        var stringToReturn = ""
+        if group.count != 0 {
+            stringToReturn += group.capitalized
+            if origin.count != 0 {
+                stringToReturn += " - "
+                stringToReturn += origin.firstUppercased
+            }
+        }
+        return stringToReturn
     }
     
-    func replaceLettersWithUndscore() -> String {
+    func replaceLettersWithUnderscore() -> String {
         var finalWord = ""
         for _ in self.word {
             finalWord += "_ "
@@ -35,4 +45,11 @@ class Word {
         return finalWord
     }
     
+}
+
+extension StringProtocol {
+    var firstUppercased: String {
+        guard let first = first else {return "" }
+        return String(first).uppercased() + dropFirst()
+    }
 }

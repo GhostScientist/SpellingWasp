@@ -109,7 +109,6 @@
 				D3A7FA3520F9C70900B68744 /* Frameworks */,
 				D3A7FA3620F9C70900B68744 /* Resources */,
 				635B8A9DFCECD8FA75C83C38 /* [CP] Embed Pods Frameworks */,
-				9FCDDBA6E5A9AAEFC0961286 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -205,21 +204,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SpellingWasp/Pods-SpellingWasp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9FCDDBA6E5A9AAEFC0961286 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SpellingWasp/Pods-SpellingWasp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
