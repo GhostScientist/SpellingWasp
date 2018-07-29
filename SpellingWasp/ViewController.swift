@@ -196,6 +196,10 @@ class ViewController: UIViewController {
         }
     }
     
+    func blacklistIncompleteWordObjects() {
+        print("This will keep track of any bad words from the text file")
+    }
+    
     @objc func loadWordsFromAPI(_ number: Int = 30) {
         for i in 0...number {
             sendRequestToAPIFor(word: stringsLoadedFromTextFile[i])
