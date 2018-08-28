@@ -190,7 +190,7 @@ class ViewController: UIViewController {
                 currentWord = wordsToPresent[0]
                 DispatchQueue.main.async {
                     self.wordField.text = self.currentWord.replaceLettersWithUnderscore()
-                    self.wordDataLabel.text = self.currentWord.returnDescriptiveStringFor()
+                    self.wordDataLabel.text = selfwingrid.currentWord.returnDescriptiveStringFor()
                 }
             }
         }
