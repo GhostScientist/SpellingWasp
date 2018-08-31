@@ -54,6 +54,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D31E5D462139A4AC005D30BA /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		D3A7FA2F20F9C70900B68744 = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +82,7 @@
 		D3A7FA3A20F9C70900B68744 /* SpellingWasp */ = {
 			isa = PBXGroup;
 			children = (
+				D31E5D462139A4AC005D30BA /* New Group */,
 				D3A7FA3B20F9C70900B68744 /* AppDelegate.swift */,
 				D3A7FA3D20F9C70900B68744 /* ViewController.swift */,
 				D35426E320F9CFD00019DF6C /* Word.swift */,
