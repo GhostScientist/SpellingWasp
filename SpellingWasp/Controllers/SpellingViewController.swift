@@ -12,11 +12,17 @@ import AVFoundation
 import GameplayKit
 import Alamofire
 
-class ViewController: UIViewController {
+class SpellingViewController: UIViewController {
+    
+    var numberOfWordsToPresent: Int!
     
     let baseAPIURL = "https://od-api.oxforddictionaries.com/api/v1/entries/en/"
     var apiKey = ""
     var appID = ""
+    
+    // MARK: Interface Builder Connections
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
