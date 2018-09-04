@@ -93,7 +93,6 @@
 				D3A4CFF620FC7C230091885C /* all_words.txt */,
 				D3A7FA3B20F9C70900B68744 /* AppDelegate.swift */,
 				D3A7FA4220F9C70F00B68744 /* Assets.xcassets */,
-				D3A7FA4720F9C70F00B68744 /* Info.plist */,
 				D372A2CA20FB780400035546 /* Keys.plist */,
 			);
 			path = "Supporting Files";
@@ -129,6 +128,7 @@
 		D3A7FA3A20F9C70900B68744 /* SpellingWasp */ = {
 			isa = PBXGroup;
 			children = (
+				D3A7FA4720F9C70F00B68744 /* Info.plist */,
 				D348AC27213EC815004C551B /* Views */,
 				D348AC26213EC7FD004C551B /* Supporting Files */,
 				D348AC25213EC7D6004C551B /* Networking */,

@@ -14,7 +14,14 @@ import Alamofire
 
 class SpellingViewController: UIViewController {
     
-    var numberOfWordsToPresent: Int!
+    
+    // MARK: - IB Connections
+
+    @IBOutlet weak var numberOfWords: UILabel?
+    
+    
+    
+    var numberOfWordsToPresent: Int?
     
     let baseAPIURL = "https://od-api.oxforddictionaries.com/api/v1/entries/en/"
     var apiKey = ""
@@ -26,23 +33,23 @@ class SpellingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        retrieveKeys()
+        numberOfWords?.text = "Hello"
+        //retrieveKeys()
         
     }
     
-    func retrieveKeys() {
-        var keys: NSDictionary?
-        
-        if let path = Bundle.main.path(forResource: "Keys", ofType: "plist") {
-            let url = URL(fileURLWithPath: path)
-            keys = NSDictionary(contentsOf: url)
-        }
-        if let dict = keys {
-            apiKey = dict["oxfordAppKey"] as! String
-            appID = dict["oxfordAppID"] as! String
-        }
-    }
+//    func retrieveKeys() {
+//        var keys: NSDictionary?
+//        
+//        if let path = Bundle.main.path(forResource: "Keys", ofType: "plist") {
+//            let url = URL(fileURLWithPath: path)
+//            keys = NSDictionary(contentsOf: url)
+//        }
+//        if let dict = keys {
+//            apiKey = dict["oxfordAppKey"] as! String
+//            appID = dict["oxfordAppID"] as! String
+//        }
+//    }
 }
 
 
