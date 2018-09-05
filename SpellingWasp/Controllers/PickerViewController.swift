@@ -50,11 +50,16 @@ class PickerViewController: UIViewController {
     }
 
     @IBAction func chooseTapped(_ sender: UIButton) {
-        let vc = SpellingViewController()
-        vc.numberOfWordsToPresent = selectedNum!
-        navigationController?.pushViewController(vc, animated: true)
+        performSegue(withIdentifier: "goToSpelling", sender: self)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToSpelling" {
+            if let destinationVC = segue.destination as? SpellingViewController {
+                destinationVC.numberOfWordsToPresent = selectedNum!
+            }
+        }
+    }
     
     func userInterfaceSetup() {
         for button in buttons {

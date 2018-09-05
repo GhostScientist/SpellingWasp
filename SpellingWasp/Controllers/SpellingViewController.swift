@@ -18,7 +18,7 @@ class SpellingViewController: UIViewController {
         title = "__ __ __ __ __ __ __"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Solve", style: .plain, target: self, action: #selector(solveTapped))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Skip", style: .plain, target: self, action: #selector(skipTapped))
+        
         // Do any additional setup after loading the view.
     }
 
@@ -29,7 +29,7 @@ class SpellingViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        view.backgroundColor = UIColor.white
+        //view.backgroundColor = UIColor.white
     }
     
     @objc func solveTapped() {
@@ -41,6 +41,17 @@ class SpellingViewController: UIViewController {
     @objc func skipTapped() {
         print("Skip works")
     }
-
+    
+    // MARK: - IB Actions
+    
+    @IBAction func repeatTapped(_ sender: UIButton) {
+        if let num = numberOfWordsToPresent {
+            print(num)
+        }
+    }
+    
+    @IBAction func exampleTapped(_ sender: UIButton) {
+    }
+    
     
 }
