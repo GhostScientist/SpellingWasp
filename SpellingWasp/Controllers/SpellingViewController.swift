@@ -1,56 +1,46 @@
 //
-//  ViewController.swift
+//  SpellingViewController.swift
 //  SpellingWasp
 //
-//  Created by Dakota Kim on 7/14/18.
+//  Created by Dakota Kim on 9/5/18.
 //  Copyright © 2018 Dakota Kim. All rights reserved.
 //
 
 import UIKit
-import SwiftyJSON
-import AVFoundation
-import GameplayKit
-import Alamofire
 
 class SpellingViewController: UIViewController {
     
-    
-    // MARK: - IB Connections
-
-    @IBOutlet weak var numberOfWords: UILabel?
-    
-    
-    
     var numberOfWordsToPresent: Int?
-    
-    let baseAPIURL = "https://od-api.oxforddictionaries.com/api/v1/entries/en/"
-    var apiKey = ""
-    var appID = ""
-    
-    // MARK: Interface Builder Connections
-    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        numberOfWords?.text = "Hello"
-        //retrieveKeys()
-        
+        title = "__ __ __ __ __ __ __"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Solve", style: .plain, target: self, action: #selector(solveTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Skip", style: .plain, target: self, action: #selector(skipTapped))
+        // Do any additional setup after loading the view.
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
-//    func retrieveKeys() {
-//        var keys: NSDictionary?
-//        
-//        if let path = Bundle.main.path(forResource: "Keys", ofType: "plist") {
-//            let url = URL(fileURLWithPath: path)
-//            keys = NSDictionary(contentsOf: url)
-//        }
-//        if let dict = keys {
-//            apiKey = dict["oxfordAppKey"] as! String
-//            appID = dict["oxfordAppID"] as! String
-//        }
-//    }
+    override func loadView() {
+        super.loadView()
+        view.backgroundColor = UIColor.white
+    }
+    
+    @objc func solveTapped() {
+        if let num = numberOfWordsToPresent {
+            print("solve works - \(num)")
+        }
+    }
+    
+    @objc func skipTapped() {
+        print("Skip works")
+    }
+
+    
 }
-
-
-

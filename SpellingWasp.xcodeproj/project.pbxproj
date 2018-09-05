@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		D215530506D6FA7E8448E81E /* Pods_SpellingWasp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 960A80087FAB76F6B611E852 /* Pods_SpellingWasp.framework */; };
 		D348AC29213ECBBA004C551B /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D348AC28213ECBBA004C551B /* PickerViewController.swift */; };
+		D348AC2B214015D5004C551B /* SpellingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D348AC2A214015D5004C551B /* SpellingViewController.swift */; };
+		D348AC2D21402CBD004C551B /* CorrectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D348AC2C21402CBD004C551B /* CorrectViewController.swift */; };
+		D348AC2F21402CC8004C551B /* IncorrectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D348AC2E21402CC8004C551B /* IncorrectViewController.swift */; };
 		D35426E420F9CFD00019DF6C /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35426E320F9CFD00019DF6C /* Word.swift */; };
 		D372A2CB20FB780400035546 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = D372A2CA20FB780400035546 /* Keys.plist */; };
 		D3A4CFF720FC7C230091885C /* all_words.txt in Resources */ = {isa = PBXBuildFile; fileRef = D3A4CFF620FC7C230091885C /* all_words.txt */; };
 		D3A7FA3C20F9C70900B68744 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A7FA3B20F9C70900B68744 /* AppDelegate.swift */; };
-		D3A7FA3E20F9C70900B68744 /* SpellingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A7FA3D20F9C70900B68744 /* SpellingViewController.swift */; };
 		D3A7FA4120F9C70900B68744 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3A7FA3F20F9C70900B68744 /* Main.storyboard */; };
 		D3A7FA4320F9C70F00B68744 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3A7FA4220F9C70F00B68744 /* Assets.xcassets */; };
 		D3A7FA4620F9C70F00B68744 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3A7FA4420F9C70F00B68744 /* LaunchScreen.storyboard */; };
@@ -24,12 +26,14 @@
 		AF7DCE0F7E3C8AFB6BD4E0E6 /* Pods-SpellingWasp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpellingWasp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpellingWasp/Pods-SpellingWasp.release.xcconfig"; sourceTree = "<group>"; };
 		BD79EAE287D7C0E84844BD2C /* Pods-SpellingWasp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpellingWasp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpellingWasp/Pods-SpellingWasp.debug.xcconfig"; sourceTree = "<group>"; };
 		D348AC28213ECBBA004C551B /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
+		D348AC2A214015D5004C551B /* SpellingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpellingViewController.swift; sourceTree = "<group>"; };
+		D348AC2C21402CBD004C551B /* CorrectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectViewController.swift; sourceTree = "<group>"; };
+		D348AC2E21402CC8004C551B /* IncorrectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncorrectViewController.swift; sourceTree = "<group>"; };
 		D35426E320F9CFD00019DF6C /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		D372A2CA20FB780400035546 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		D3A4CFF620FC7C230091885C /* all_words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = all_words.txt; sourceTree = "<group>"; };
 		D3A7FA3820F9C70900B68744 /* SpellingWasp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpellingWasp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3A7FA3B20F9C70900B68744 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D3A7FA3D20F9C70900B68744 /* SpellingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpellingViewController.swift; sourceTree = "<group>"; };
 		D3A7FA4020F9C70900B68744 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D3A7FA4220F9C70F00B68744 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3A7FA4520F9C70F00B68744 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -59,8 +63,10 @@
 		D31E5D462139A4AC005D30BA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D3A7FA3D20F9C70900B68744 /* SpellingViewController.swift */,
 				D348AC28213ECBBA004C551B /* PickerViewController.swift */,
+				D348AC2A214015D5004C551B /* SpellingViewController.swift */,
+				D348AC2C21402CBD004C551B /* CorrectViewController.swift */,
+				D348AC2E21402CC8004C551B /* IncorrectViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -264,10 +270,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3A7FA3E20F9C70900B68744 /* SpellingViewController.swift in Sources */,
+				D348AC2B214015D5004C551B /* SpellingViewController.swift in Sources */,
 				D3A7FA3C20F9C70900B68744 /* AppDelegate.swift in Sources */,
 				D348AC29213ECBBA004C551B /* PickerViewController.swift in Sources */,
 				D35426E420F9CFD00019DF6C /* Word.swift in Sources */,
+				D348AC2F21402CC8004C551B /* IncorrectViewController.swift in Sources */,
+				D348AC2D21402CBD004C551B /* CorrectViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

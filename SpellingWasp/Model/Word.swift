@@ -13,50 +13,17 @@ struct Word {
     var classification: String
     var originOfWord: String
     var examplesOfUsage: [String]?
+    var pronunciationAudioURL: String?
+    
+    // The method convertToUnderscores returns a string with one underscore per letter in the word.
+    // For example, if the word is "Cake" this method would return "__ __ __ __ ". There
+    // is an extra space at the end, but that's not really a problem. It shouldn't affect our testing.
+    
+    func convertToUnderscores() -> String {
+        var stringToReturn = ""
+        for _ in word {
+            stringToReturn += "__ "
+        }
+        return stringToReturn
+    }
 }
-
-//class Word {
-//    var word = ""
-//    var group = ""
-//    var origin = ""
-//    var exampleOfUsage : String // These will be read aloud using AVSpeechSynthesizer
-//
-//    init(word: String, group: String, origin: String, exampleOfUsage: String) {
-//        self.word = word
-//        self.group = group
-//        self.origin = origin
-//        if exampleOfUsage.count > 0 {
-//            self.exampleOfUsage = exampleOfUsage
-//        } else {
-//            self.exampleOfUsage = "There are no examples for the word \(word)."
-//        }
-//    }
-//
-//    func returnDescriptiveStringFor() -> String {
-//        var stringToReturn = ""
-//        if group.count != 0 {
-//            stringToReturn += group.capitalized
-//            if origin.count != 0 {
-//                stringToReturn += " - "
-//                stringToReturn += origin.firstUppercased
-//            }
-//        }
-//        return stringToReturn
-//    }
-//
-//    func replaceLettersWithUnderscore() -> String {
-//        var finalWord = ""
-//        for _ in self.word {
-//            finalWord += "_ "
-//        }
-//        return finalWord
-//    }
-//
-//}
-//
-//extension StringProtocol {
-//    var firstUppercased: String {
-//        guard let first = first else {return "" }
-//        return String(first).uppercased() + dropFirst()
-//    }
-//}

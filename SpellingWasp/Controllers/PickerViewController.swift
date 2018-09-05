@@ -10,7 +10,7 @@ import UIKit
 
 class PickerViewController: UIViewController {
     
-    var selectedNum: Int!
+    var selectedNum: Int?
 
     // MARK: - IB Outlets
     @IBOutlet weak var tenWordsOutlet: UIButton!
@@ -51,9 +51,7 @@ class PickerViewController: UIViewController {
 
     @IBAction func chooseTapped(_ sender: UIButton) {
         let vc = SpellingViewController()
-        if let number = selectedNum {
-            vc.numberOfWordsToPresent = number
-        }
+        vc.numberOfWordsToPresent = selectedNum!
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -65,7 +63,7 @@ class PickerViewController: UIViewController {
             button.layer.shadowOpacity = 1.0
             button.layer.shadowRadius = 0.0
             button.layer.masksToBounds = true
-            button.layer.cornerRadius = 4.0
+            button.layer.cornerRadius = 10.0
         }
         pickOneButton.isEnabled = false
         title = "SpellingWasp"
