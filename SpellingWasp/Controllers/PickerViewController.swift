@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol PickerDelegate {
+    func didTap(num: Int)
+}
+
 class PickerViewController: UIViewController {
+    
+    var pickerDelegate: PickerDelegate!
     
     var selectedNum: Int?
 
@@ -19,15 +25,13 @@ class PickerViewController: UIViewController {
     @IBOutlet weak var twentyFiveWordsOutlet: UIButton!
     @IBOutlet weak var pickOneButton: UIButton!
     
-    
     var buttons = [UIButton]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         buttons = [tenWordsOutlet, fifteenWordsOutlet, twentyWordsOutlet, twentyFiveWordsOutlet, pickOneButton]
-        DispatchQueue.main.async {
-            self.userInterfaceSetup()
-        }
+        userInterfaceSetup()
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,7 +54,10 @@ class PickerViewController: UIViewController {
     }
 
     @IBAction func chooseTapped(_ sender: UIButton) {
-        performSegue(withIdentifier: "goToSpelling", sender: self)
+        if let num = selectedNum {
+            pickerDelegate.didTap(num: num)
+            dismiss(animated: true, completion: nil)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -68,7 +75,7 @@ class PickerViewController: UIViewController {
             button.layer.shadowOpacity = 1.0
             button.layer.shadowRadius = 0.0
             button.layer.masksToBounds = true
-            button.layer.cornerRadius = 10.0
+            button.layer.cornerRadius = button.frame.height / 2.0
         }
         pickOneButton.isEnabled = false
         title = "SpellingWasp"

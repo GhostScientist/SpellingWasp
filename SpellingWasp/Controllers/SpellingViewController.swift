@@ -8,9 +8,15 @@
 
 import UIKit
 
-class SpellingViewController: UIViewController {
+class SpellingViewController: UIViewController, PickerDelegate {
     
-    var numberOfWordsToPresent: Int?
+    internal var numberOfWordsToPresent: Int? {
+        didSet {
+            chosenNum = true
+        }
+    }
+    
+    internal var chosenNum = false
     
     
     override func viewDidLoad() {
@@ -19,7 +25,17 @@ class SpellingViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Solve", style: .plain, target: self, action: #selector(solveTapped))
         
+        
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if chosenNum == false {
+            super.viewDidAppear(animated)
+            let vc = storyboard?.instantiateViewController(withIdentifier: "PickerView") as! PickerViewController
+            vc.pickerDelegate = self
+            present(vc, animated: true)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,6 +68,10 @@ class SpellingViewController: UIViewController {
     
     @IBAction func exampleTapped(_ sender: UIButton) {
     }
-    
-    
+
+    func didTap(num: Int) {
+        numberOfWordsToPresent = num
+        print(chosenNum)
+        print(numberOfWordsToPresent)
+    }
 }
