@@ -12,6 +12,7 @@
 		D348AC2B214015D5004C551B /* SpellingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D348AC2A214015D5004C551B /* SpellingViewController.swift */; };
 		D348AC2D21402CBD004C551B /* CorrectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D348AC2C21402CBD004C551B /* CorrectViewController.swift */; };
 		D348AC2F21402CC8004C551B /* IncorrectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D348AC2E21402CC8004C551B /* IncorrectViewController.swift */; };
+		D348AC3121404265004C551B /* Networker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D348AC3021404265004C551B /* Networker.swift */; };
 		D35426E420F9CFD00019DF6C /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35426E320F9CFD00019DF6C /* Word.swift */; };
 		D372A2CB20FB780400035546 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = D372A2CA20FB780400035546 /* Keys.plist */; };
 		D3A4CFF720FC7C230091885C /* all_words.txt in Resources */ = {isa = PBXBuildFile; fileRef = D3A4CFF620FC7C230091885C /* all_words.txt */; };
@@ -29,6 +30,7 @@
 		D348AC2A214015D5004C551B /* SpellingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpellingViewController.swift; sourceTree = "<group>"; };
 		D348AC2C21402CBD004C551B /* CorrectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectViewController.swift; sourceTree = "<group>"; };
 		D348AC2E21402CC8004C551B /* IncorrectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncorrectViewController.swift; sourceTree = "<group>"; };
+		D348AC3021404265004C551B /* Networker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networker.swift; sourceTree = "<group>"; };
 		D35426E320F9CFD00019DF6C /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		D372A2CA20FB780400035546 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		D3A4CFF620FC7C230091885C /* all_words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = all_words.txt; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 		D348AC25213EC7D6004C551B /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				D348AC3021404265004C551B /* Networker.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D348AC2B214015D5004C551B /* SpellingViewController.swift in Sources */,
+				D348AC3121404265004C551B /* Networker.swift in Sources */,
 				D3A7FA3C20F9C70900B68744 /* AppDelegate.swift in Sources */,
 				D348AC29213ECBBA004C551B /* PickerViewController.swift in Sources */,
 				D35426E420F9CFD00019DF6C /* Word.swift in Sources */,

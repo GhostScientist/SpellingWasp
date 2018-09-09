@@ -15,7 +15,7 @@ class SpellingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "__ __ __ __ __ __ __"
+        title = "SpellingWasp"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Solve", style: .plain, target: self, action: #selector(solveTapped))
         
