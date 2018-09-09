@@ -2,7 +2,7 @@
 //  Networker.swift
 //  SpellingWasp
 //
-//  Created by Dakota Kim on 9/5/18.
+//  Created by Dakota Kim on 9/9/18.
 //  Copyright © 2018 Dakota Kim. All rights reserved.
 //
 
@@ -46,7 +46,7 @@ public final class Networker {
                 print(response)
                 print(jsonData)
             } else {
-                 print(error)
+                print(error)
             }
         }).resume()
     }
