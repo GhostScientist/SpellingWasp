@@ -34,7 +34,7 @@ public final class Networker {
         self.appKey = appKey
     }
     
-    public func grabWordInfo(word: String) {
+    public func grabWordInfo(word: String) -> JSON {
         let url = baseURL.appendingPathComponent(word)
         var request = URLRequest(url: url)
         request.addValue("application/json", forHTTPHeaderField: "Accept")

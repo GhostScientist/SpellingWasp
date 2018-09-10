@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SwiftyJSON
+import GameplayKit
 
 class SpellingViewController: UIViewController, PickerDelegate {
     
@@ -18,6 +20,8 @@ class SpellingViewController: UIViewController, PickerDelegate {
     
     internal var chosenNum = false
     
+    var wordToPresent: Word?
+    var wordsToPresent = [Word]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,11 +41,6 @@ class SpellingViewController: UIViewController, PickerDelegate {
             present(vc, animated: true)
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     override func loadView() {
         super.loadView()
@@ -49,29 +48,52 @@ class SpellingViewController: UIViewController, PickerDelegate {
     }
     
     @objc func solveTapped() {
+        // This will present an alert controller with a text field for the user to submit their
+        // spelling attempt. If they're correct, it will play a noise and load a "Tap to Continue" screen
+        // for when the user is ready.
+        
         if let num = numberOfWordsToPresent {
             print("solve works - \(num)")
         }
     }
     
     @objc func skipTapped() {
+        // The user can choose to skip the current word without it counting against their selected goal.
         print("Skip works")
+    }
+    
+    func loadUI() {
+        let networker = Networker.shared
+        networker.grabWordInfo(word: <#T##String#>)
     }
     
     // MARK: - IB Actions
     
     @IBAction func repeatTapped(_ sender: UIButton) {
-        if let num = numberOfWordsToPresent {
-            print(num)
-        }
+        // Will play the audio file downloaded from the dictionary.
+        
     }
     
     @IBAction func exampleTapped(_ sender: UIButton) {
+        // Will use speech generator to read the example aloud
+        
     }
 
     func didTap(num: Int) {
         numberOfWordsToPresent = num
         print(chosenNum)
         print(numberOfWordsToPresent)
+    }
+}
+
+extension SpellingViewController {
+    func generateWord() -> String? {
+        if let filePath = Bundle.main.path(forResource: "all_words", ofType: "txt") {
+            if let allWords = try? String.init(contentsOfFile: filePath) {
+                let mixedList = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: allWords.components(separatedBy: "\n")) as! [String]
+                return mixedList[0]
+            }
+        }
+        return nil
     }
 }
