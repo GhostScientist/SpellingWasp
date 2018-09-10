@@ -14,53 +14,48 @@ import AVFoundation
 class SpellingViewController: UIViewController, PickerDelegate {
     
     // MARK: - IB Connections
-    
     @IBOutlet weak var secretWord: UILabel!
     @IBOutlet weak var groupLabel: UILabel!
     @IBOutlet weak var originLabel: UILabel!
     @IBOutlet weak var repeatOutlet: UIButton!
     @IBOutlet weak var exampleOutlet: UIButton!
     
-    
-    
+    // MARK: - Observed properties
     internal var numberOfWordsToPresent: Int? {
         didSet {
             chosenNum = true
         }
     }
     
-    internal var chosenNum = false
-    
     var wordToPresent: Word? {
         didSet {
             DispatchQueue.main.async { [unowned self] in
                 if let word = self.wordToPresent {
-                    self.speak("Your next word is...\(word.word)")
                     self.secretWord.text = word.convertToUnderscores()
                     self.groupLabel.text = word.classification
-                    self.originLabel.text = word.originOfWord
+                    if word.originOfWord == "" {
+                        self.originLabel.text = "There's not enough information about the origin of this word."
+                    } else {
+                        self.originLabel.text = word.originOfWord
+                    }
+                    self.speak("Your word is...\(word.word)")
                 }
             }
         }
     }
     
-    var wordsToPresent = [Word]()
+    // MARK: - Instance variables
     
+    var count = 0
+    internal var chosenNum = false
     var player: AVPlayer?
-    
     var networker: Networker!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = "SpellingWasp"
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Solve", style: .plain, target: self, action: #selector(solveTapped))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Skip", style: .plain, target: self, action: #selector(skipTapped))
         networker = Networker.shared
         networker?.networkerDelegate = self
         loadUI()
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -73,15 +68,27 @@ class SpellingViewController: UIViewController, PickerDelegate {
     }
     
     func loadUI() {
-        title = "SpellingWasp"
+        title = "Select #"
         repeatOutlet.layer.cornerRadius = repeatOutlet.frame.height / 2
-        exampleOutlet.layer.cornerRadius = exampleOutlet.frame.height / 2 
+        exampleOutlet.layer.cornerRadius = exampleOutlet.frame.height / 2
+        //navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Solve", style: .plain, target: self, action: #selector(solveTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Skip", style: .plain, target: self, action: #selector(skipTapped))
+        originLabel.adjustsFontSizeToFitWidth = true
+        secretWord.adjustsFontSizeToFitWidth = true
     }
     
     override func loadView() {
         super.loadView()
-        
-        //view.backgroundColor = UIColor.white
+    }
+    
+    // MARK: - Methods
+    
+    func speak(_ word: String) {
+        let utter = AVSpeechUtterance(string: word)
+        utter.rate = 0.4
+        let synth = AVSpeechSynthesizer()
+        synth.speak(utter)
     }
     
     @objc func solveTapped() {
@@ -94,17 +101,13 @@ class SpellingViewController: UIViewController, PickerDelegate {
         
         ac.addAction(UIAlertAction(title: "Submit", style: .default, handler: { [unowned self] (action) in
             if ac.textFields![0].text!.lowercased() == self.wordToPresent!.word.lowercased() { // If the word the user entered is correct
-                self.speak("You are correct. Good job!")
-                self.loadWord()
+                self.wordToPresent?.correctAnswer()
+                self.loadWord(skipped: false)
             } else {
                 DispatchQueue.main.async {
-                    var string = "You are incorrect. The word \(self.wordToPresent!.word) is spelled: "
-                    for eachLetter in Array(self.wordToPresent!.word) {
-                        string += " \(eachLetter) "
-                    }
-                    self.speak(string)
+                    self.wordToPresent?.wrongAnswer()
+                    self.loadWord(skipped: false)
                 }
-                self.loadWord()
             }
         }))
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
@@ -116,19 +119,17 @@ class SpellingViewController: UIViewController, PickerDelegate {
         let ac = UIAlertController(title: "Skip", message: "Are you sure you want to skip?", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "No", style: .default))
         ac.addAction(UIAlertAction(title: "Yes", style: .default, handler: { [unowned self] (action) in
-            self.loadWord()
+            self.loadWord(skipped: true)
         }))
         present(ac, animated: true)
     }
 
     
-    func loadWord() {
+    func loadWord(skipped: Bool) {
         print("Loading word...")
         if let wordToLoad = generateWord() {
             print("Loading word: \(wordToLoad)")
-            if let json = networker.grabWordInfo(word: wordToLoad) {
-                wordToPresent = Word(json: json)
-            }
+            networker.grabWordInfo(word: wordToLoad, skipped: skipped)
         }
     }
     
@@ -137,7 +138,7 @@ class SpellingViewController: UIViewController, PickerDelegate {
     @IBAction func repeatTapped(_ sender: UIButton) {
         // Will play the audio file downloaded from the dictionary.
         if let word = wordToPresent {
-            speak(word.word)
+            speak("Your word is \(word.word)")
         }
     }
     
@@ -146,25 +147,16 @@ class SpellingViewController: UIViewController, PickerDelegate {
             speak(word.examplesOfUsage)
         }
     }
+    
+    // Delegate method
 
     func didTap(num: Int) {
         numberOfWordsToPresent = num
-        loadWord()
+        title = "\(count) / \(numberOfWordsToPresent!)"
+        loadWord(skipped: false)
     }
     
-    func speak(_ phrase: String) {
-        let utter = AVSpeechUtterance(string: phrase)
-        utter.rate = 0.4
-        let synth = AVSpeechSynthesizer()
-        synth.speak(utter)
-    }
     
-    func spellWordOut(_ word: String) {
-        let array = Array(word)
-        for letter in array {
-            speak(String(letter))
-        }
-    }
 }
 
 extension SpellingViewController: NetworkerDelegate {
@@ -178,8 +170,13 @@ extension SpellingViewController: NetworkerDelegate {
         return nil
     }
     
-    func buildWord(_ json: JSON) {
-        print("Building word....")
-        wordToPresent = Word(json: json)
+    func buildWord(_ json: JSON, skipped: Bool) {
+        if !skipped {
+            count += 1
+        }
+        DispatchQueue.main.async { [unowned self] in
+            self.title = "\(self.count) / \(self.numberOfWordsToPresent!)"
+            self.wordToPresent = Word(json: json)
+        }
     }
 }

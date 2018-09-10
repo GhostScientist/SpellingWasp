@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 protocol NetworkerDelegate {
-    func buildWord(_ json: JSON)
+    func buildWord(_ json: JSON, skipped: Bool)
 }
 
 public final class Networker {
@@ -39,7 +39,7 @@ public final class Networker {
         self.appKey = appKey
     }
     
-    public func grabWordInfo(word: String) -> JSON? {
+    public func grabWordInfo(word: String, skipped: Bool) -> JSON? {
         let url = baseURL.appendingPathComponent(word)
         var request = URLRequest(url: url)
         var jsonStuff: JSON?
@@ -51,7 +51,7 @@ public final class Networker {
             if error == nil {
                 do {
                     let json = try JSON(data: data!)
-                    self.networkerDelegate.buildWord(json)
+                    self.networkerDelegate.buildWord(json, skipped: skipped)
                 } catch {
                     print("Building JSON failed due to \(error.localizedDescription)")
                 }
