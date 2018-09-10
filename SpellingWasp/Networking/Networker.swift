@@ -9,6 +9,10 @@
 import Foundation
 import SwiftyJSON
 
+protocol NetworkerDelegate {
+    func buildWord(_ json: JSON)
+}
+
 public final class Networker {
     
     // MARK: - Instance variables
@@ -16,6 +20,7 @@ public final class Networker {
     internal let session = URLSession.shared
     internal let appID: String
     internal let appKey: String
+    var networkerDelegate: NetworkerDelegate!
     
     // MARK: - Class Constructor
     public static let shared: Networker = {
@@ -34,20 +39,30 @@ public final class Networker {
         self.appKey = appKey
     }
     
-    public func grabWordInfo(word: String) -> JSON {
+    public func grabWordInfo(word: String) -> JSON? {
         let url = baseURL.appendingPathComponent(word)
         var request = URLRequest(url: url)
+        var jsonStuff: JSON?
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue(Networker.shared.appID, forHTTPHeaderField: "app_id")
         request.addValue(Networker.shared.appKey, forHTTPHeaderField: "app_key")
         
         _ = session.dataTask(with: request, completionHandler: { (data, response, error) in
-            if let response = response, let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) {
-                print(response)
-                print(jsonData)
+            if error == nil {
+                do {
+                    let json = try JSON(data: data!)
+                    self.networkerDelegate.buildWord(json)
+                } catch {
+                    print("Building JSON failed due to \(error.localizedDescription)")
+                }
             } else {
-                print(error)
+                print(error?.localizedDescription)
             }
         }).resume()
+        
+        if let json = jsonStuff {
+            return json
+        }
+        return nil
     }
 }

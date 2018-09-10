@@ -9,8 +9,15 @@
 import UIKit
 import SwiftyJSON
 import GameplayKit
+import AVFoundation
 
 class SpellingViewController: UIViewController, PickerDelegate {
+    
+    // MARK: - IB Connections
+    
+    @IBOutlet weak var secretWord: UILabel!
+    @IBOutlet weak var groupLabel: UILabel!
+    @IBOutlet weak var originLabel: UILabel!
     
     internal var numberOfWordsToPresent: Int? {
         didSet {
@@ -20,16 +27,32 @@ class SpellingViewController: UIViewController, PickerDelegate {
     
     internal var chosenNum = false
     
-    var wordToPresent: Word?
+    var wordToPresent: Word? {
+        didSet {
+            DispatchQueue.main.async { [unowned self] in
+                if let word = self.wordToPresent {
+                    self.speak("Your next word is...\(word.word)")
+                    self.secretWord.text = word.convertToUnderscores()
+                    self.groupLabel.text = word.classification
+                    self.originLabel.text = word.originOfWord
+                }
+            }
+        }
+    }
+    
     var wordsToPresent = [Word]()
+    
+    var player: AVPlayer?
+    
+    var networker: Networker!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "SpellingWasp"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Solve", style: .plain, target: self, action: #selector(solveTapped))
-        
-        
+        networker = Networker.shared
+        networker?.networkerDelegate = self
         // Do any additional setup after loading the view.
     }
     
@@ -39,11 +62,12 @@ class SpellingViewController: UIViewController, PickerDelegate {
             let vc = storyboard?.instantiateViewController(withIdentifier: "PickerView") as! PickerViewController
             vc.pickerDelegate = self
             present(vc, animated: true)
-        }
+        } 
     }
     
     override func loadView() {
         super.loadView()
+        
         //view.backgroundColor = UIColor.white
     }
     
@@ -62,31 +86,49 @@ class SpellingViewController: UIViewController, PickerDelegate {
         print("Skip works")
     }
     
-    func loadUI() {
-        let networker = Networker.shared
-        networker.grabWordInfo(word: <#T##String#>)
+    @IBAction func nextTapped(_ sender: UIButton) {
+        loadWord()
+    }
+    
+    func loadWord() {
+        print("Loading word...")
+        if let wordToLoad = generateWord() {
+            print("Loading word: \(wordToLoad)")
+            if let json = networker.grabWordInfo(word: wordToLoad) {
+                wordToPresent = Word(json: json)
+            }
+        }
     }
     
     // MARK: - IB Actions
     
     @IBAction func repeatTapped(_ sender: UIButton) {
         // Will play the audio file downloaded from the dictionary.
-        
+        if let word = wordToPresent {
+            speak(word.word)
+        }
     }
     
     @IBAction func exampleTapped(_ sender: UIButton) {
-        // Will use speech generator to read the example aloud
-        
+        if let word = wordToPresent {
+            speak(word.examplesOfUsage)
+        }
     }
 
     func didTap(num: Int) {
         numberOfWordsToPresent = num
-        print(chosenNum)
-        print(numberOfWordsToPresent)
+        loadWord()
+    }
+    
+    func speak(_ phrase: String) {
+        let utter = AVSpeechUtterance(string: phrase)
+        utter.rate = 0.4
+        let synth = AVSpeechSynthesizer()
+        synth.speak(utter)
     }
 }
 
-extension SpellingViewController {
+extension SpellingViewController: NetworkerDelegate {
     func generateWord() -> String? {
         if let filePath = Bundle.main.path(forResource: "all_words", ofType: "txt") {
             if let allWords = try? String.init(contentsOfFile: filePath) {
@@ -95,5 +137,10 @@ extension SpellingViewController {
             }
         }
         return nil
+    }
+    
+    func buildWord(_ json: JSON) {
+        print("Building word....")
+        wordToPresent = Word(json: json)
     }
 }

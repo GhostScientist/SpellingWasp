@@ -23,16 +23,16 @@ struct Word {
     func convertToUnderscores() -> String {
         var stringToReturn = ""
         for _ in word {
-            stringToReturn += "__ "
+            stringToReturn += "__  "
         }
         return stringToReturn
     }
     
     init(json: JSON) {
-        self.word = json["results"]["id"].stringValue.capitalized
-        self.classification = json["results"]["lexicalEntries"][0]["lexicalCategory"].stringValue
-        self.originOfWord = json["results"]["lexicalEntries"][0]["etymologies"][0].stringValue
-        self.examplesOfUsage = json["results"]["lexicalEntries"]["pronunciations"]["examples"][0]["text"].stringValue
-        self.pronunciationAudioURL = json["results"]["lexicalEntries"]["pronunciations"][0]["audioFile"].stringValue
+        self.word = json["results"][0]["word"].stringValue
+        self.classification = json["results"][0]["lexicalEntries"][0]["lexicalCategory"].stringValue
+        self.originOfWord = json["results"][0]["lexicalEntries"][0]["entries"][0]["etymologies"][0].stringValue
+        self.examplesOfUsage = json["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["examples"][0]["text"].stringValue
+        self.pronunciationAudioURL = json["results"][0]["lexicalEntries"][0]["pronunciations"][0]["audioFile"].stringValue
     }
 }
