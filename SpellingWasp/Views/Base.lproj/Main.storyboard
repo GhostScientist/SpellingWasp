@@ -149,10 +149,10 @@
                                 <rect key="frame" x="0.0" y="352.5" width="320" height="215.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="01O-jS-Zdn">
-                                        <rect key="frame" x="35" y="28" width="250" height="160"/>
+                                        <rect key="frame" x="22.5" y="20.5" width="275" height="175"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e1K-Wi-HPR">
-                                                <rect key="frame" x="0.0" y="0.0" width="250" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="275" height="67.5"/>
                                                 <color key="backgroundColor" red="0.61568627450980395" green="0.8784313725490196" blue="0.62352941176470589" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="37"/>
                                                 <state key="normal" title="Repeat Word">
@@ -163,7 +163,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yma-rT-PwU">
-                                                <rect key="frame" x="0.0" y="100" width="250" height="60"/>
+                                                <rect key="frame" x="0.0" y="107.5" width="275" height="67.5"/>
                                                 <color key="backgroundColor" red="0.61568627450980395" green="0.8784313725490196" blue="0.62352941176470589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="37"/>
                                                 <state key="normal" title="Example">
@@ -175,14 +175,14 @@
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="160" id="32i-ye-Zfd"/>
-                                            <constraint firstAttribute="width" constant="250" id="Jm7-2m-zwc"/>
+                                            <constraint firstAttribute="width" constant="275" id="IHT-dq-VJf"/>
+                                            <constraint firstAttribute="height" constant="175" id="iUe-wC-VNP"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="01O-jS-Zdn" firstAttribute="centerX" secondItem="hwI-1D-nwR" secondAttribute="centerX" id="Ee3-8S-SCI"/>
-                                    <constraint firstItem="01O-jS-Zdn" firstAttribute="centerY" secondItem="hwI-1D-nwR" secondAttribute="centerY" id="b0D-o8-ul4"/>
+                                    <constraint firstItem="01O-jS-Zdn" firstAttribute="centerX" secondItem="hwI-1D-nwR" secondAttribute="centerX" id="cGU-5s-wFz"/>
+                                    <constraint firstItem="01O-jS-Zdn" firstAttribute="centerY" secondItem="hwI-1D-nwR" secondAttribute="centerY" id="gSq-eh-Vrz"/>
                                 </constraints>
                             </view>
                         </subviews>
