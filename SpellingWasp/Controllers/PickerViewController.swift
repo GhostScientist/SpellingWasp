@@ -75,7 +75,7 @@ class PickerViewController: UIViewController {
             button.layer.shadowOpacity = 1.0
             button.layer.shadowRadius = 0.0
             button.layer.masksToBounds = true
-            button.layer.cornerRadius = button.frame.height / 2.0
+            button.layer.cornerRadius = button.frame.height / 3.5
         }
         pickOneButton.isEnabled = false
         title = "SpellingWasp"
