@@ -59,16 +59,18 @@ class SpellingViewController: UIViewController, PickerDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         if chosenNum == false {
-            super.viewDidAppear(animated)
-            let vc = storyboard?.instantiateViewController(withIdentifier: "PickerView") as! PickerViewController
-            vc.pickerDelegate = self
-            present(vc, animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) { [unowned self] in
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "PickerView") as! PickerViewController
+                vc.pickerDelegate = self
+                self.present(vc, animated: true)
+            }
         } 
     }
     
     func loadUI() {
-        title = "Select #"
+        title = "Loading..."
         repeatOutlet.layer.cornerRadius = repeatOutlet.frame.height / 2
         exampleOutlet.layer.cornerRadius = exampleOutlet.frame.height / 2
         //navigationController?.navigationBar.prefersLargeTitles = true
