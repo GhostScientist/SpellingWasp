@@ -13,6 +13,9 @@ import AVFoundation
 
 class SpellingViewController: UIViewController, PickerDelegate {
     
+    // MARK: - Instance Variables
+    var numCorrect = 0
+    
     // MARK: - IB Connections
     @IBOutlet weak var secretWord: UILabel!
     @IBOutlet weak var groupLabel: UILabel!
@@ -103,6 +106,7 @@ class SpellingViewController: UIViewController, PickerDelegate {
         
         ac.addAction(UIAlertAction(title: "Submit", style: .default, handler: { [unowned self] (action) in
             if ac.textFields![0].text!.lowercased() == self.wordToPresent!.word.lowercased() { // If the word the user entered is correct
+                self.numCorrect += 1
                 self.wordToPresent?.correctAnswer()
                 self.loadWord(skipped: false)
             } else {
@@ -129,6 +133,16 @@ class SpellingViewController: UIViewController, PickerDelegate {
     
     func loadWord(skipped: Bool) {
         print("Loading word...")
+        
+        if count == numberOfWordsToPresent! {
+            let vc = storyboard?.instantiateViewController(withIdentifier: "Results") as! ResultsViewController
+            if let numSelected = numberOfWordsToPresent {
+                vc.totalNum = numSelected
+                vc.numCorrect = numCorrect
+            }
+            present(vc, animated: true)
+        }
+        
         if let wordToLoad = generateWord() {
             print("Loading word: \(wordToLoad)")
             networker.grabWordInfo(word: wordToLoad, skipped: skipped)

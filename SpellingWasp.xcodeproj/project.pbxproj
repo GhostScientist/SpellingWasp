@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D215530506D6FA7E8448E81E /* Pods_SpellingWasp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 960A80087FAB76F6B611E852 /* Pods_SpellingWasp.framework */; };
+		D33CA5012149BC720055AC7D /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33CA5002149BC720055AC7D /* ResultsViewController.swift */; };
 		D348AC29213ECBBA004C551B /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D348AC28213ECBBA004C551B /* PickerViewController.swift */; };
 		D348AC2B214015D5004C551B /* SpellingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D348AC2A214015D5004C551B /* SpellingViewController.swift */; };
 		D348AC2D21402CBD004C551B /* CorrectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D348AC2C21402CBD004C551B /* CorrectViewController.swift */; };
@@ -26,6 +27,7 @@
 		960A80087FAB76F6B611E852 /* Pods_SpellingWasp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpellingWasp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF7DCE0F7E3C8AFB6BD4E0E6 /* Pods-SpellingWasp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpellingWasp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpellingWasp/Pods-SpellingWasp.release.xcconfig"; sourceTree = "<group>"; };
 		BD79EAE287D7C0E84844BD2C /* Pods-SpellingWasp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpellingWasp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpellingWasp/Pods-SpellingWasp.debug.xcconfig"; sourceTree = "<group>"; };
+		D33CA5002149BC720055AC7D /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		D348AC28213ECBBA004C551B /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		D348AC2A214015D5004C551B /* SpellingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpellingViewController.swift; sourceTree = "<group>"; };
 		D348AC2C21402CBD004C551B /* CorrectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				D348AC2A214015D5004C551B /* SpellingViewController.swift */,
 				D348AC2C21402CBD004C551B /* CorrectViewController.swift */,
 				D348AC2E21402CC8004C551B /* IncorrectViewController.swift */,
+				D33CA5002149BC720055AC7D /* ResultsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				D35426E420F9CFD00019DF6C /* Word.swift in Sources */,
 				D348AC2F21402CC8004C551B /* IncorrectViewController.swift in Sources */,
 				D348AC2D21402CBD004C551B /* CorrectViewController.swift in Sources */,
+				D33CA5012149BC720055AC7D /* ResultsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
