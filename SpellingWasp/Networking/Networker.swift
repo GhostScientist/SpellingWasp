@@ -39,10 +39,9 @@ public final class Networker {
         self.appKey = appKey
     }
     
-    public func grabWordInfo(word: String, skipped: Bool) -> JSON? {
+    public func grabWordInfo(word: String, skipped: Bool) {
         let url = baseURL.appendingPathComponent(word)
         var request = URLRequest(url: url)
-        var jsonStuff: JSON?
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue(Networker.shared.appID, forHTTPHeaderField: "app_id")
         request.addValue(Networker.shared.appKey, forHTTPHeaderField: "app_key")
@@ -59,10 +58,5 @@ public final class Networker {
                 print(error?.localizedDescription)
             }
         }).resume()
-        
-        if let json = jsonStuff {
-            return json
-        }
-        return nil
     }
 }
