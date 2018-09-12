@@ -78,6 +78,7 @@ class PickerViewController: UIViewController {
             button.layer.cornerRadius = button.frame.height / 3.5
         }
         pickOneButton.isEnabled = false
+        pickOneButton.titleLabel?.adjustsFontSizeToFitWidth = true
         title = "SpellingWasp"
     }
 }

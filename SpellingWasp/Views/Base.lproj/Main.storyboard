@@ -65,12 +65,12 @@
                                             <action selector="didSelectNumberOfWords:" destination="BZm-r0-0vF" eventType="touchUpInside" id="oMJ-QQ-3X0"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tAi-wj-eGl">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tAi-wj-eGl">
                                         <rect key="frame" x="0.0" y="442.5" width="220" height="60.5"/>
                                         <color key="backgroundColor" red="0.61568627450980395" green="0.8784313725490196" blue="0.62352941176470589" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                         <state key="normal" title="Pick One">
-                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="chooseTapped:" destination="BZm-r0-0vF" eventType="touchUpInside" id="35e-kA-K4J"/>
