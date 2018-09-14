@@ -55,7 +55,7 @@ public final class Networker {
                     print("Building JSON failed due to \(error.localizedDescription)")
                 }
             } else {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription ?? "Error")
             }
         }).resume()
     }
