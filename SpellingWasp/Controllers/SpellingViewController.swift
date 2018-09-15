@@ -13,9 +13,6 @@ import AVFoundation
 
 class SpellingViewController: UIViewController, PickerDelegate {
     
-    // MARK: - Instance Variables
-    var numCorrect = 0
-    
     // MARK: - IB Connections
     @IBOutlet weak var secretWord: UILabel!
     @IBOutlet weak var groupLabel: UILabel!
@@ -53,6 +50,7 @@ class SpellingViewController: UIViewController, PickerDelegate {
     internal var chosenNum = false
     var player: AVPlayer?
     var networker: Networker!
+    var numCorrect = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +58,8 @@ class SpellingViewController: UIViewController, PickerDelegate {
         networker?.networkerDelegate = self
         loadUI()
     }
+    
+    // When the view appears, if the user hasn't selected a number, present the PickerVC modally.
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -72,6 +72,8 @@ class SpellingViewController: UIViewController, PickerDelegate {
         } 
     }
     
+    // The loadUI() method applies customizations to the view.
+    
     func loadUI() {
         title = "Loading..."
         repeatOutlet.layer.cornerRadius = repeatOutlet.frame.height / 2
@@ -83,12 +85,9 @@ class SpellingViewController: UIViewController, PickerDelegate {
         secretWord.adjustsFontSizeToFitWidth = true
     }
     
-    override func loadView() {
-        super.loadView()
-    }
-    
     // MARK: - Methods
     
+    // This method will 'speak' any string provided. It's used throughout the app.
     func speak(_ word: String) {
         let utter = AVSpeechUtterance(string: word)
         utter.rate = 0.4
@@ -141,9 +140,7 @@ class SpellingViewController: UIViewController, PickerDelegate {
                 vc.numCorrect = numCorrect
             }
             present(vc, animated: true)
-        }
-        
-        if let wordToLoad = generateWord() {
+        } else if let wordToLoad = generateWord() {
             print("Loading word: \(wordToLoad)")
             networker.grabWordInfo(word: wordToLoad, skipped: skipped)
         }
@@ -152,12 +149,13 @@ class SpellingViewController: UIViewController, PickerDelegate {
     // MARK: - IB Actions
     
     @IBAction func repeatTapped(_ sender: UIButton) {
-        // Will play the audio file downloaded from the dictionary.
+        // Will speak the word.
         if let word = wordToPresent {
             speak("Your word is \(word.word)")
         }
     }
     
+    // Will speak an example sentence using the word.
     @IBAction func exampleTapped(_ sender: UIButton) {
         if let word = wordToPresent {
             speak(word.examplesOfUsage)

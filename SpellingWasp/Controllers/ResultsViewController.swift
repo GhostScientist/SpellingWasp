@@ -8,6 +8,10 @@
 
 import UIKit
 
+// This VC will be presented to users after they have finished spelling their selected
+// number of words. It's a simple presentation screen that informs users how many they got correct
+// out of the total.
+
 class ResultsViewController: UIViewController {
     
     // Instance Variables
@@ -19,7 +23,6 @@ class ResultsViewController: UIViewController {
     @IBOutlet weak var numberCorrect: UILabel!
     @IBOutlet weak var numberTotal: UILabel!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let numRight = numCorrect, let numTotal = totalNum {
@@ -27,9 +30,4 @@ class ResultsViewController: UIViewController {
             numberTotal.text = "\(numTotal) Total"
         }
     }
-    
-    // MARK: - IB Actions
-    
-    
-    
 }

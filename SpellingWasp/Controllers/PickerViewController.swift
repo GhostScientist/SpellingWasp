@@ -5,8 +5,12 @@
 //  Created by Dakota Kim on 9/4/18.
 //  Copyright © 2018 Dakota Kim. All rights reserved.
 //
+// This view controller will be presented upon launching the app if the user has not chosen
+// the number of words they wish to spell.
 
 import UIKit
+
+// We're using delegation to handle communication between PickerViewController and SpellingViewController
 
 protocol PickerDelegate {
     func didTap(num: Int)
@@ -14,9 +18,11 @@ protocol PickerDelegate {
 
 class PickerViewController: UIViewController {
     
-    var pickerDelegate: PickerDelegate!
+    // MARK: - Instance Variables
     
+    var pickerDelegate: PickerDelegate!
     var selectedNum: Int?
+    var buttons = [UIButton]()
 
     // MARK: - IB Outlets
     @IBOutlet weak var tenWordsOutlet: UIButton!
@@ -25,11 +31,10 @@ class PickerViewController: UIViewController {
     @IBOutlet weak var twentyFiveWordsOutlet: UIButton!
     @IBOutlet weak var pickOneButton: UIButton!
     
-    var buttons = [UIButton]()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Add the UIButtons to an array to add UI properties.
         buttons = [tenWordsOutlet, fifteenWordsOutlet, twentyWordsOutlet, twentyFiveWordsOutlet, pickOneButton]
         userInterfaceSetup()
     }
@@ -39,7 +44,12 @@ class PickerViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - IB Actions
+    // MARK: - IB Action Methods
+    
+    // This function disables the selected button, enables the unselected buttons, and changes the "Pick One"
+    // button to say "Let's Go!."
+    
+    
     @IBAction func didSelectNumberOfWords(_ sender: UIButton) {
         for button in buttons {
             if button.tag == sender.tag {
@@ -53,6 +63,8 @@ class PickerViewController: UIViewController {
         }
     }
 
+    // When user is ready to begin, this method passes their chosen value to the SpellingVC.
+    
     @IBAction func chooseTapped(_ sender: UIButton) {
         if let num = selectedNum {
             pickerDelegate.didTap(num: num)
@@ -60,13 +72,7 @@ class PickerViewController: UIViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToSpelling" {
-            if let destinationVC = segue.destination as? SpellingViewController {
-                destinationVC.numberOfWordsToPresent = selectedNum!
-            }
-        }
-    }
+    // Runs through the buttons array and tweaks the UI a bit.
     
     func userInterfaceSetup() {
         for button in buttons {
