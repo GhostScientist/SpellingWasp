@@ -156,6 +156,7 @@ class SpellingViewController: UIViewController, PickerDelegate {
     }
     
     // Will speak an example sentence using the word.
+    // COmmit
     @IBAction func exampleTapped(_ sender: UIButton) {
         if let word = wordToPresent {
             speak(word.examplesOfUsage)
