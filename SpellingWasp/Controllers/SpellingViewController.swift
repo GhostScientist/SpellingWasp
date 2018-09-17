@@ -83,6 +83,10 @@ class SpellingViewController: UIViewController, PickerDelegate {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Skip", style: .plain, target: self, action: #selector(skipTapped))
         originLabel.adjustsFontSizeToFitWidth = true
         secretWord.adjustsFontSizeToFitWidth = true
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.tintColor = UIColor.white
     }
     
     // MARK: - Methods
@@ -156,7 +160,7 @@ class SpellingViewController: UIViewController, PickerDelegate {
     }
     
     // Will speak an example sentence using the word.
-    // COmmit
+    
     @IBAction func exampleTapped(_ sender: UIButton) {
         if let word = wordToPresent {
             speak(word.examplesOfUsage)
